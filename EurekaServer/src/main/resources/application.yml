@@ -5,8 +5,8 @@ spring:
     basic:
       enabled: true
     user:
-      name: marcoadp
-      password: santos2023
+      name: ${EUREKA_NAME}
+      password: ${EUREKA_PWD}
 
 
 server:
