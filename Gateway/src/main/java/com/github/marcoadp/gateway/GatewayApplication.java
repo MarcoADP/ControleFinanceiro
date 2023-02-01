@@ -19,9 +19,9 @@ public class GatewayApplication {
     public RouteLocator routes(RouteLocatorBuilder builder) {
         return builder
                 .routes()
+                .route(r -> r.path("/bancario/**").uri("lb://msbancario"))
                 /* TODO ADICIONAR ROTAS
                 .route(r -> r.path("/acesso/**").uri("lb://msacesso"))
-                .route(r -> r.path("/bancario/**").uri("lb://msbancario"))
                 .route(r -> r.path("/financeiro/**").uri("lb://msfinanceiro"))
                 .route(r -> r.path("/investimento/**").uri("lb://msinvestimento"))
                  */

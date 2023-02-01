@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: msbancario
+  rabbitmq:
+    host: ${RABBITMQ_SERVER}
+    port: ${RABBITMQ_PORT}
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PWD}
+
+server:
+  port: 0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${EUREKA_NAME}:${EUREKA_PWD}@${EUREKA_SERVER}:${EUREKA_PORT}/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+mq:
+  queues:
+    movimentacao: ${RABBITMQ_QUEUE}
