@@ -14,7 +14,7 @@ public class ContaDTO {
     private String banco;
     private String descricao;
 
-    public static ContaDTO fromConta(Conta conta) {
+    public static ContaDTO fromEntity(Conta conta) {
         return new ContaDTO(
                 conta.getId(),
                 conta.getUsuarioCpf(),
@@ -24,8 +24,8 @@ public class ContaDTO {
         );
     }
 
-    public static List<ContaDTO> fromContas(List<Conta> contas) {
-        return contas.stream().map(ContaDTO::fromConta).toList();
+    public static List<ContaDTO> fromEntities(List<Conta> contas) {
+        return contas.stream().map(ContaDTO::fromEntity).toList();
     }
 
 }

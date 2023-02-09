@@ -33,19 +33,19 @@ public class ContaResource {
     @PostMapping
     public ResponseEntity<ContaDTO> create(@RequestBody ContaParams params) {
         Conta conta = contaService.create(params);
-        return ResponseEntity.ok(ContaDTO.fromConta(conta));
+        return ResponseEntity.ok(ContaDTO.fromEntity(conta));
     }
 
     @PutMapping(params = "id")
     public ResponseEntity<ContaDTO> update(@RequestParam("id") Long id, @RequestBody ContaParams params) {
         Conta conta = contaService.update(id, params);
-        return ResponseEntity.ok(ContaDTO.fromConta(conta));
+        return ResponseEntity.ok(ContaDTO.fromEntity(conta));
     }
 
     @GetMapping(params = "cpf")
     public ResponseEntity<List<ContaDTO>> findByUsuarioCpf(@RequestParam("cpf") String cpf) {
         List<Conta> contas = contaService.findByUsuarioCpf(cpf);
-        return ResponseEntity.ok(ContaDTO.fromContas(contas));
+        return ResponseEntity.ok(ContaDTO.fromEntities(contas));
     }
 
     @DeleteMapping(params = "id")
