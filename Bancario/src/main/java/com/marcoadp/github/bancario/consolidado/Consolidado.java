@@ -34,5 +34,9 @@ public class Consolidado {
     @NotNull
     private BigDecimal valor;
 
-
+    public Consolidado(Conta conta, BigDecimal valor) {
+        this.conta = conta;
+        this.data = LocalDateTime.now();
+        this.valor = valor;
+    }
 }

@@ -2,6 +2,6 @@ package com.marcoadp.github.bancario.movimentacao;
 
 public enum MovimentacaoTipo {
 
-    ENTRADA, TIPO
+    ENTRADA, SAIDA
 
 }

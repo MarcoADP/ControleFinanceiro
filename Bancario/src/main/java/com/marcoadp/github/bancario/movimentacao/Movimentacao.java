@@ -1,5 +1,7 @@
 package com.marcoadp.github.bancario.movimentacao;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marcoadp.github.bancario.conta.Conta;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -45,5 +47,30 @@ public class Movimentacao {
     @NotNull
     private LocalDateTime dataCadastro;
 
+    public Movimentacao(Conta conta, LocalDate data, String descricao, BigDecimal valor, MovimentacaoTipo tipo) {
+        this.conta = conta;
+        this.data = data;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.tipo = tipo;
+        this.dataCadastro = LocalDateTime.now();
+    }
 
+    public void update(Conta conta, LocalDate data, String descricao, BigDecimal valor, MovimentacaoTipo tipo) {
+        this.conta = conta;
+        this.data = data;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
