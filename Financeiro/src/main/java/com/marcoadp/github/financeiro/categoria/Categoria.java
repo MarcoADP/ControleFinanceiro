@@ -1,4 +1,4 @@
-package com.marcoadp.github.bancario.conta;
+package com.marcoadp.github.financeiro.categoria;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -14,36 +14,30 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Conta {
+public class Categoria {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String usuarioCpf;
-
-    @NotNull
     @Enumerated(EnumType.STRING)
-    private ContaTipo tipo;
+    private CategoriaTipo tipo;
 
     @NotBlank
-    private String banco;
+    private String nome;
 
-    @NotBlank
     private String descricao;
 
-    public Conta(String usuarioCpf, ContaTipo tipo, String banco, String descricao) {
-        this.usuarioCpf = usuarioCpf;
+    public Categoria(CategoriaTipo tipo, String nome, String descricao) {
         this.tipo = tipo;
-        this.banco = banco;
+        this.nome = nome;
         this.descricao = descricao;
     }
 
-    public void update(String usuarioCpf, ContaTipo tipo, String banco, String descricao) {
-        this.usuarioCpf = usuarioCpf;
+    public void update(CategoriaTipo tipo, String nome, String descricao) {
         this.tipo = tipo;
-        this.banco = banco;
+        this.nome = nome;
         this.descricao = descricao;
     }
 }

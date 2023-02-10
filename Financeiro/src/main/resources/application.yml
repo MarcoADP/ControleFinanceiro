@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: msfinanceiro
+  rabbitmq:
+    host: ${RABBITMQ_SERVER}
+    port: ${RABBITMQ_PORT}
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PWD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+  datasource:
+    url: jdbc:postgresql://${DB_SERVER}:${DB_PORT}/financeiro
+    username: ${DB_USER}
+    password: ${DB_PWD}
+    driver-class-name: org.postgresql.Driver
+  devtools:
+    livereload:
+      enabled: true
+
+
+server:
+  port: 0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${EUREKA_NAME}:${EUREKA_PWD}@${EUREKA_SERVER}:${EUREKA_PORT}/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+mq:
+  queues:
+    movimentacao: ${RABBITMQ_QUEUE}
