@@ -16,7 +16,6 @@ public class CartaoCreditoDTO {
     private Integer diaFechamento;
     private Integer diaVencimento;
     private BigDecimal limite;
-    private BigDecimal faturaParcial;
 
     public static CartaoCreditoDTO fromEntity(CartaoCredito cartaoCredito) {
         return new CartaoCreditoDTO(
@@ -26,8 +25,7 @@ public class CartaoCreditoDTO {
                 cartaoCredito.getDescricao(),
                 cartaoCredito.getDiaFechamento(),
                 cartaoCredito.getDiaVencimento(),
-                cartaoCredito.getLimite(),
-                cartaoCredito.getFaturaParcial()
+                cartaoCredito.getLimite()
         );
     }
 

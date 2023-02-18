@@ -58,8 +58,10 @@ public class CartaoCreditoResource {
     public ResponseEntity<CartaoCreditoDTO> updateFaturaParcial(
             @RequestParam("id") Long id, @RequestBody CartaoCreditoFaturaParcialParams params
     ) {
-        CartaoCredito cartaoCredito = cartaoCreditoService.updateFaturaParcial(id, params.getValor());
-        return ResponseEntity.ok(CartaoCreditoDTO.fromEntity(cartaoCredito));
+        // TODO RETORNAR FATURA DTO
+        //cartaoCreditoService.updateFaturaParcial(id, params.getValor());
+        //return ResponseEntity.ok(CartaoCreditoDTO.fromEntity(cartaoCredito));
+        return null;
     }
 
 }

@@ -39,9 +39,6 @@ public class CartaoCredito {
     @NotNull
     private BigDecimal limite;
 
-    @NotNull
-    private BigDecimal faturaParcial;
-
     public CartaoCredito(
             String usuarioCpf,
             String banco,
@@ -56,7 +53,6 @@ public class CartaoCredito {
         this.diaFechamento = diaFechamento;
         this.diaVencimento = diaVencimento;
         this.limite = limite;
-        this.faturaParcial = BigDecimal.ZERO;
     }
 
     public void update(
@@ -73,10 +69,5 @@ public class CartaoCredito {
         this.diaFechamento = diaFechamento;
         this.diaVencimento = diaVencimento;
         this.limite = limite;
-        this.faturaParcial = BigDecimal.ZERO;
-    }
-
-    public void updateFaturaParcial(BigDecimal valor) {
-        this.faturaParcial = this.getFaturaParcial().add(valor);
     }
 }

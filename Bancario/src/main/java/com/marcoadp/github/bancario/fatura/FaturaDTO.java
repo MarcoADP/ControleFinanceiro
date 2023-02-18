@@ -4,6 +4,7 @@ import com.marcoadp.github.bancario.cartaocredito.CartaoCreditoDTO;
 import com.marcoadp.github.bancario.movimentacao.MovimentacaoDTO;
 import com.marcoadp.github.bancario.utils.DateUtils;
 import java.math.BigDecimal;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -15,6 +16,7 @@ public class FaturaDTO {
     private CartaoCreditoDTO cartaoCredito;
     private String descricao;
     private FaturaSituacao situacao;
+    private String dataFechamento;
     private String dataVencimento;
     private String dataPagamento;
     private BigDecimal valor;
@@ -26,10 +28,15 @@ public class FaturaDTO {
                 CartaoCreditoDTO.fromEntity(fatura.getCartaoCredito()),
                 fatura.getDescricao(),
                 fatura.getSituacao(),
+                DateUtils.LocalDateToBrazilFormat(fatura.getDataFechamento()),
                 DateUtils.LocalDateToBrazilFormat(fatura.getDataVencimento()),
                 DateUtils.LocalDateToBrazilFormat(fatura.getDataPagamento()),
                 fatura.getValor(),
                 MovimentacaoDTO.fromEntity(fatura.getMovimentacao())
         );
+    }
+
+    public static List<FaturaDTO> fromEntities(List<Fatura> faturas) {
+        return faturas.stream().map(FaturaDTO::fromEntity).toList();
     }
 }

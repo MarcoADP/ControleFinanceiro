@@ -2,6 +2,8 @@ package com.marcoadp.github.bancario.fatura;
 
 import com.marcoadp.github.bancario.cartaocredito.CartaoCredito;
 import com.marcoadp.github.bancario.movimentacao.Movimentacao;
+import com.marcoadp.github.bancario.transacao.Transacao;
+import com.marcoadp.github.bancario.transacao.TransacaoTipo;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -37,9 +39,11 @@ public class Fatura {
     private FaturaSituacao situacao;
 
     @NotNull
-    private LocalDate dataVencimento;
+    private LocalDate dataFechamento;
 
     @NotNull
+    private LocalDate dataVencimento;
+
     private LocalDate dataPagamento;
 
     @NotNull
@@ -52,17 +56,41 @@ public class Fatura {
 
     public Fatura(
             CartaoCredito cartaoCredito,
-            String descricao,
-            LocalDate dataVencimento,
-            LocalDate dataPagamento,
-            BigDecimal valor,
-            Movimentacao movimentacao
+            Integer mesReferencia,
+            Integer anoReferencia
     ) {
         this.cartaoCredito = cartaoCredito;
-        this.descricao = descricao;
-        this.dataVencimento = dataVencimento;
-        this.dataPagamento = dataPagamento;
-        this.valor = valor;
-        this.movimentacao = movimentacao;
+        this.descricao = String.format("Fatura do cartão %s de %d/%d", cartaoCredito.getDescricao(), mesReferencia, anoReferencia);
+        this.dataFechamento = LocalDate.of(anoReferencia, mesReferencia, cartaoCredito.getDiaFechamento());
+        this.dataVencimento = LocalDate.of(anoReferencia, mesReferencia, cartaoCredito.getDiaVencimento());
+        this.valor = BigDecimal.ZERO;
+        this.situacao = FaturaSituacao.ABERTA;
     }
+
+    public void updateValor(BigDecimal valorAdd) {
+        this.valor = this.valor.add(valorAdd);
+    }
+
+    public void updateValor(Transacao transacao) {
+        if (transacao.getTipo().equals(TransacaoTipo.COMPRA)) {
+            updateValor(transacao.getValor());
+        } else {
+            updateValor(transacao.getValor().negate());
+        }
+    }
+
+    public void fechar() {
+        updateSituacao(FaturaSituacao.A_PAGAR);
+    }
+
+    public void pagar(LocalDate dataPagamento) {
+        this.dataPagamento = dataPagamento;
+        updateSituacao(FaturaSituacao.PAGA);
+    }
+
+    private void updateSituacao(FaturaSituacao situacao) {
+        this.situacao = situacao;
+    }
+
+
 }

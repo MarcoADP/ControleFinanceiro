@@ -1,5 +1,6 @@
 package com.marcoadp.github.bancario.cartaocredito;
 
+import com.marcoadp.github.bancario.fatura.Fatura;
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
@@ -42,10 +43,11 @@ public class CartaoCreditoService {
         return save(cartaoCredito);
     }
 
-    public CartaoCredito updateFaturaParcial(Long id, BigDecimal valor) {
-        CartaoCredito cartaoCredito = findByIdOrThrow(id);
-        cartaoCredito.updateFaturaParcial(valor);
-        return save(cartaoCredito);
+    public void updateFaturaParcial(Long id, BigDecimal valor) {
+        //TODO ACHAR FATURA ATUAL DO CARTAO E ADD O VALOR
+        //TODO PASSAR PARA FATURA SERVICE?
+        Fatura fatura = new Fatura();
+        fatura.updateValor(valor);
     }
 
     public CartaoCredito save(CartaoCredito cartaoCredito) {
